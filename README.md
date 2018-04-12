@@ -14,7 +14,9 @@
 
  Open a command prompt at the root of the project and run: 
  `npm install`
+ 
 Still at the prompt enter the "src/Presentation/Site" directory and run
  `npm install`
+ 
  To run the application run the command `node app.js` in the directory "src/Presentation/Site"
  To access the application in your browser go to "http://localhost:3001/mg/clients" or "http://localhost:3001/sp/clients"
