@@ -8,6 +8,11 @@
  - [For tests Mocha](https://mochajs.org/)
 
  ## Initialization
+
+>  **The configuration file for the databases is in the path:
+> "/src/Infra/Data/database.json"**
+
+ 
  Create two databases with the following names:
  - database_developmentmg
  - database_developmentsp
