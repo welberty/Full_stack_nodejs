@@ -1,0 +1,40 @@
+{
+	"development": {
+		"username": "root",
+		"password": "root",
+		"database": "database_development",
+		"host": "127.0.0.1",
+		"dialect": "mysql",
+		"logging": false 
+	},
+	"developmentmg": {
+		"username": "root",
+		"password": "root",
+		"database": "database_developmentMG",
+		"host": "127.0.0.1",
+		"dialect": "mysql"
+	},
+	"developmentsp": {
+		"username": "root",
+		"password": "root",
+		"database": "database_developmentSP",
+		"host": "127.0.0.1",
+		"dialect": "mysql",
+		"logging": false
+	},
+	"test": {
+		"username": "root",
+		"password": null,
+		"database": "database_test",
+		"host": "127.0.0.1",
+		"dialect": "mysql"
+	},
+	"production": {
+		"username": "root",
+		"password": "root",
+		"database": "database_production",
+		"host": "127.0.0.1",
+		"dialect": "mysql",
+		"logging": false
+	}
+}

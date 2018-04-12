@@ -1,0 +1,81 @@
+﻿extends layout
+
+block content
+	h1= title
+	p Welcome to #{title}
+	.container-fluid#app
+		.row
+			.col-md-12
+				form.form(@submit.prevent="applyFilter")
+					.form-row.align-items-cente
+						.form-group.col-md-4
+							label(for="name") Nome
+							input.form-control#name(type="text", placeholder="Digite um nome", v-model="name")
+						.form-group.col-md-4
+							label(for="cpf") CPF
+							input.form-control#cpf(type="text", placeholder="Digite um CPF", v-model="cpf", v-mask="'###.###.###-##'")
+						.form-group.col-md-4
+							label(for="data") Data nascimento
+							input.form-control#data(type="Date", placeholder="Digite uma data", v-model="birthDay")
+					button.btn.btn-primary(type="button" @click.stop="novo") Novo
+		.row
+			.col-md-12
+				hr
+				b-pagination(:total-rows="total" :per-page="perPage" v-model="currentPage" class="my-0")
+				b-table(ref='table' show-empty stacked="md"  :items="provider" :fields="fields" :current-page="currentPage" :per-page="perPage" :filter="filter" )
+					template(slot="actions" slot-scope="row")
+						b-button(size='sm' variant='outline-warning' @click.stop="edit(row.item, row.index, $event.target)")
+							i(class="fas fa-edit")
+						|&nbsp;
+						b-button(size='sm' variant='danger' @click.stop="del(row.item, row.index, $event.target)" class="mr-1")
+							i(class="fas fa-trash")
+				b-modal(id="modalEdit" ref="modalEdit" @hide="resetModal" title="Cadastro" ok-only ok-title="Salvar")
+					.container-fluid
+						.row
+							.col-md-12
+								form#frmEdit.needs-validation.was-validated(novalidate)
+									.form-row
+										.form-group.col-md-6
+											label(for="nameEdit") Nome
+											input.form-control#nameEdit(type="text", placeholder="Digite um nome", v-model="editItem.name", required)
+											.invalid-feedback Nome requerido.
+										.form-group.col-md-6
+											label(for="dataEdit") Data nascimento
+											if checkBirthDay
+												input.form-control#dataEdit(type="Date", placeholder="Digite uma data", v-model="editItem.birthDay", v-bind:class="checkBirthDay", required)
+												.invalid-feedback Data nascimento requerido e superior a 18 anos.
+											else
+												input.form-control#dataEdit(type="Date", placeholder="Digite uma data", v-model="editItem.birthDay", required)
+												.invalid-feedback Data nascimento requerido.
+									.form-row
+										.form-group.col-md-6
+											label(for="cpfEdit") CPF
+											input.form-control#cpfEdit(type="text", placeholder="Digite um CPF", v-model="editItem.cpf", v-mask="'###.###.###-##'", v-bind:class="validCpf", required)
+											.invalid-feedback CPF requerido ou inválido.
+										.form-group.col-md-6
+											label(for="rgEdit") RG
+											if rgRequired
+												input.form-control#rgEdit(type="text", placeholder="RG", v-model="editItem.rg", required)
+												.invalid-feedback RG requerido.
+											else
+												input.form-control#rgEdit(type="text", placeholder="RG", v-model="editItem.rg")
+									.form-row
+										.form-group.col-md-6
+											label(for="cpfEdit") Telefones:
+										.form-group.col-md-6
+											b-button(size='sm' variant='primary' @click.stop="addNumber()")
+												i(class="fas fa-plus")
+									.form-row(v-for="(number, numberIdx) in editItem.PhoneNumbers")
+										.form-group.col-md-6
+											input.form-control(type="text", placeholder="Telefone", v-model="number.number", v-mask="'(##) ####-####'")
+										.form-group.col-md-6
+											b-button(size='sm' variant='primary' @click.stop="removeNumber(numberIdx)")
+												i(class="fas fa-minus")
+					div.w-100(slot="modal-footer")
+						button.btn.btn-primary.float-right(type="button" @click="saveItem") Salvar
+									
+				b-pagination(:total-rows="total" :per-page="perPage" v-model="currentPage" class="my-0")
+block pageScripts
+	script(src='https://cdn.jsdelivr.net/npm/v-mask/dist/v-mask.min.js')
+	script(src='/js/clients.js')
+							
