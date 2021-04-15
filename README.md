@@ -25,5 +25,6 @@ Still at the prompt enter the "src/Presentation/Site" directory and run
  
  To run tests go to the "src/Presentation/Test" directory and run the command `mocha  ClientTest.js`
  
- To run application run the command `node app.js` in the directory "src/Presentation/Site"
+ To run application run the command `node app.js` in the directory "src/Presentation/Site".
+ 
  To access the application in your browser go to "http://localhost:3001/mg/clients" or "http://localhost:3001/sp/clients"
