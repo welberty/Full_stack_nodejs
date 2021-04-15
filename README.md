@@ -1,4 +1,4 @@
-# Example of DDD application in NodeJs
+# Full stack application in NodeJs
 
 ## Requirements
 
